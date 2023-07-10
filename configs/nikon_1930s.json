@@ -41,9 +41,9 @@
     ],
     "photos": [
         {
-            "path": "./assets/camera_logos/SONY/logo.jpg",
-            "position_offset": ["50%","0%"],
-            "scale": "70%"
+            "path": "./assets/camera_logos/NIKON/pic_1930s.jpg",
+            "position_offset": ["50%","-1%"],
+            "scale": "65%"
         }
     ]
 }

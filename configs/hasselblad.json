@@ -41,9 +41,9 @@
     ],
     "photos": [
         {
-            "path": "./assets/camera_logos/SONY/logo.jpg",
+            "path": "./assets/camera_logos/Hasselblad/logo.jpg",
             "position_offset": ["50%","0%"],
-            "scale": "70%"
+            "scale": "85%"
         }
     ]
 }
