@@ -12,6 +12,12 @@ $ cd YourPhotoBorder
 $ python3 -m pip install --requirement requirements.txt
 ```
 
+### 命令参数
+```
+-c : 指定配置文件
+-f : 指定输入图片
+-o : 指定输出位置
+```
 
 ### 命令如下
 ```
@@ -22,12 +28,7 @@ $ python3 ./main.py -c ./configs/default.json -f ./test/test_photo.jpg -o ./outp
 ![样图](https://github.com/sprayman1999/YourPhotoBorder/blob/main/output/output.jpg)
 
 
-### 命令参数
-```
--c : 指定配置文件
--f : 指定输入图片
--o : 指定输出位置
-```
+
 
 ## Config文件
 ### 列表(不定时更新)
