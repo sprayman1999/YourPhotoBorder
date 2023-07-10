@@ -1,0 +1,22 @@
+{
+    "border_size": 70,
+    "background": [255,255,255],
+    "extra_length": 600,
+    "camera_args_direction": "down",
+    "labels": [
+        {
+            "label_name": "test_label",
+            "font_path": "",
+            "font_size": 18,
+            "content": "",
+            "position": [100,100]
+        }
+    ],
+    "photos": [
+        {
+            "photo_path": "",
+            "photo_size": [100,100],
+            "photo_position": [100,100]
+        }
+    ]
+}
