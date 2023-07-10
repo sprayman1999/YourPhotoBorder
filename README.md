@@ -1,4 +1,8 @@
 # YourPhotoBorder
+## 简述
+我是一名摄影爱好者📷 & 程序员🧑‍💻，在大半夜有感而发，突然想写一个添加相框的自动化程序⚙️，可以给照片带来更进一步的仪式感🎆
+如果我帮助到您，可点个star🌟支持我
+
 ## 使用教程
 ### 环境配置
 首先需要安装[python3](https://www.python.org/downloads/)
@@ -25,7 +29,9 @@ $ python3 ./main.py -c ./configs/default.json -f ./test/test_photo.jpg -o ./outp
 -o : 指定输出位置
 ```
 
-## Config
+## Config文件
+### 列表(不定时更新)
+ - 
 ### 转译
 ### Default Config
 ```
@@ -81,6 +87,12 @@ $ python3 ./main.py -c ./configs/default.json -f ./test/test_photo.jpg -o ./outp
 }
 ```
 
+## FINISHED
+ - JPEG解析器
+ - 绘图代码核心
+ - 配置文件初步确定
+ - 输出简单的样例
+
 ## TODO
  - 完善config格式
  - 完善各类相机厂家的logo数据
@@ -89,6 +101,9 @@ $ python3 ./main.py -c ./configs/default.json -f ./test/test_photo.jpg -o ./outp
  - 支持GUI拖动组件，并最后导出配置文件
  - 图片渲染可能存在乱序，需要设定level来限制渲染顺序
  - 背景可设置成图片
+ - 手机照片目前还不支持
+ - 批量导入导出图片
 
 ## BUG
  - sRGB JPEG导出后和原图相比，暗部会偏白
+
