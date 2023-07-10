@@ -24,7 +24,7 @@ $ python3 -m pip install --requirement requirements.txt
 $ python3 ./main.py -c ./configs/default.json -f ./test/test_photo.jpg -o ./output/output.jpg
 ```
 ### 样图如下
-以下是我在西湖拍摄的照片，用该程序加上相框之后效果如下
+以下是我在西湖（HangZhou West Lake）拍摄的照片，用该程序加上相框之后效果如下
 ![样图](https://github.com/sprayman1999/YourPhotoBorder/blob/main/output/output.jpg)
 
 
