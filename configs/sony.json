@@ -27,7 +27,7 @@
             "font_path": "./fonts/AlibabaPuHuiTi-3-55-Regular/AlibabaPuHuiTi-3-55-Regular.ttf",
             "font_size": "3.8%",
             "content": "${FOCAL_LENGTH}m f/${APERTURE} ${EXPOSURE_TIME} ISO${CAMERA_ISO}",
-            "position_offset": ["68%","3.75%"],
+            "position_offset": ["70%","3.75%"],
             "font_color": [0,0,0]
         },
         {
@@ -35,13 +35,13 @@
             "font_path": "./fonts/AlibabaPuHuiTi-3-45-Light/AlibabaPuHuiTi-3-45-Light.ttf",
             "font_size": "3.5%",
             "content": "${CAMERA_LENS_MODEL}",
-            "position_offset": ["68%","10%"],
+            "position_offset": ["70%","10%"],
             "font_color": [0,0,0]
         }
     ],
     "photos": [
         {
-            "path": "./assets/camera_logos/NIKON/logo.png",
+            "path": "./assets/camera_logos/SONY/logo.jpg",
             "position_offset": ["55%","0%"],
             "scale": "65%"
         }

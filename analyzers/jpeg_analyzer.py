@@ -2,7 +2,6 @@ import piexif
 import exifread
 class JpegAnalyzer(object):
     def __init__(self,path):
-        pass
         self.path = path
     def get_exif(self):
         with open(self.path, 'rb') as f:
@@ -21,7 +20,7 @@ class JpegAnalyzer(object):
         '''
         with open(self.path, 'rb') as f:
             tags = exifread.process_file(f)
-        return tags['Image Model']
+        return str(tags['Image Model'])
     
     def get_camera_iso(self) -> str:
         '''
@@ -29,7 +28,7 @@ class JpegAnalyzer(object):
         '''
         with open(self.path, 'rb') as f:
             tags = exifread.process_file(f)
-        return tags['EXIF ISOSpeedRatings']
+        return str(tags['EXIF ISOSpeedRatings'])
     
     def get_camera_aperture(self) -> str:
         with open(self.path, 'rb') as f:
@@ -44,12 +43,12 @@ class JpegAnalyzer(object):
     def get_camera_exposure_time(self) -> str:
         with open(self.path, 'rb') as f:
             tags = exifread.process_file(f)
-        return tags['EXIF ExposureTime']
+        return str(tags['EXIF ExposureTime'])
     
     def get_camera_lens_model(self) -> str:
         with open(self.path, 'rb') as f:
             tags = exifread.process_file(f)
-        return tags['EXIF LensModel']
+        return str(tags['EXIF LensModel'])
     
     def get_width(self) -> int:
         with open(self.path, 'rb') as f:
@@ -61,6 +60,17 @@ class JpegAnalyzer(object):
             tags = exifread.process_file(f)
         return int(str(tags['EXIF ExifImageLength']))
     
+    def get_original_datetime(self):
+        with open(self.path, 'rb') as f:
+            tags = exifread.process_file(f)
+        return str(tags['EXIF DateTimeOriginal'])
+    
+    def get_camera_focal_length(self) -> str:
+        with open(self.path, 'rb') as f:
+            tags = exifread.process_file(f)
+        return int(str(tags['EXIF FocalLength']))
+        
+        
 def test():
     #test_jpeg_path = '../test/DSC00524.JPG'
     test_jpeg_path = "../test/test_photo.jpg"
@@ -72,6 +82,7 @@ def test():
     print(f"Aperture: {analyzer.get_camera_aperture()}")
     print(f"Width: {analyzer.get_width()}")
     print(f"Height: {analyzer.get_height()}")
+    print(f"Time: {analyzer.get_original_datetime()}")
 def main():
     test()
 if __name__ == '__main__':
