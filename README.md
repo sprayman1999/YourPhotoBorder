@@ -5,7 +5,7 @@
 
 ## 使用教程
 ### 环境配置
-首先需要安装[python3](https://www.python.org/downloads/)
+首先需要安装[Python3](https://www.python.org/downloads/)
 ```
 $ git clone https://github.com/sprayman1999/YourPhotoBorder
 $ cd YourPhotoBorder
@@ -29,7 +29,6 @@ $ python3 ./main.py -c ./configs/default.json -f ./test/test_photo.jpg -o ./outp
 
 
 
-
 ## Config文件
 ### 列表(不定时更新)
  - default.json
@@ -41,9 +40,18 @@ $ python3 ./main.py -c ./configs/default.json -f ./test/test_photo.jpg -o ./outp
  - leica.json
  - sony.json
 
+### Label内容转译
+如果Label Content字段存在如下内容时，该内容数据将会被自动替换
+```
+"${CAMERA_MODEL}":            相机名称
+"${PHOTO_ORIGINAL_DATETIME}": 拍摄时间
+"${CAMERA_ISO}":              照片ISO
+"${APERTURE}":                相机光圈
+"${EXPOSURE_TIME}":           相机曝光时间
+"${FOCAL_LENGTH}":            镜头当前焦段
+"${CAMERA_LENS_MODEL}":       相机镜头名称
+```
 
-
-### 转译
 ### Default Config
 ```
 {
