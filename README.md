@@ -18,6 +18,7 @@ $ python3 -m pip install --requirement requirements.txt
 $ python3 ./main.py -c ./configs/default.json -f ./test/test_photo.jpg -o ./output/output.jpg
 ```
 ### 样图如下
+以下是我在西湖拍摄的照片，用该程序加上相框之后效果如下
 ![样图](https://github.com/sprayman1999/YourPhotoBorder/blob/main/output/output.jpg)
 
 
@@ -30,7 +31,17 @@ $ python3 ./main.py -c ./configs/default.json -f ./test/test_photo.jpg -o ./outp
 
 ## Config文件
 ### 列表(不定时更新)
- - 
+ - default.json
+ - nikon_1930s.json
+ - nikon_1949.json
+ - canon.json
+ - fujifilm.json
+ - hasselblad.json
+ - leica.json
+ - sony.json
+
+
+
 ### 转译
 ### Default Config
 ```
