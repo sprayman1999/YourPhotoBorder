@@ -1,7 +1,7 @@
 # YourPhotoBorder
 ## 简述
 我是一名摄影爱好者📷 & 程序员🧑‍💻，在大半夜有感而发，突然想写一个添加相框的自动化程序⚙️，可以给照片带来更进一步的仪式感🎆  
-如果我帮助到您，可点个star🌟支持我  
+如果我的工具帮助到了您，也可点个star🌟支持我  
 
 ## 使用教程
 ### 环境配置
@@ -11,7 +11,6 @@ $ git clone https://github.com/sprayman1999/YourPhotoBorder
 $ cd YourPhotoBorder
 $ python3 -m pip install --requirement requirements.txt
 ```
-
 
 
 ### 命令如下
