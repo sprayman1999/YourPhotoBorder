@@ -50,11 +50,13 @@ $ python3 ./main.py -c ./configs/your_photo_border.json -f ./test/ -o ./output/
 
 ## Config文件
 ### 列表(不定时更新)
+ - canon.json
  - default.json
  - nikon_1930s.json
  - nikon_1949.json
  - canon.json
  - fujifilm.json
+ - fujifilm_rotated.json
  - hasselblad.json
  - leica.json
  - sony.json
