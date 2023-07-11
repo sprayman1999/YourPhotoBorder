@@ -27,7 +27,15 @@ def test(input_path,output_path,source_path):
     for rule in config['rules']:
         camera_company = JpegAnalyzer(input_path).get_camera_company()
         if camera_company.find(rule['camera_company']) != -1:
-            PhotoBorder(input_path,config,source_exif_path=source_path).generate().save(output_path)
+            print(f"[*] PhotoPath: {input_path}\tOutputPath: {output_path}\tExifSourcePath: {source_path}")
+            if JpegAnalyzer(input_path).get_image_orientation()[0] == 'Horizontal':
+                border_config = rule['camera_horizontal_config']
+            else:
+                border_config = rule['camera_rotated_config']
+            with open(border_config,"r") as f:
+                PhotoBorder(f"{input_path}",json.loads(f.read()),source_exif_path=source_path) \
+                    .generate() \
+                    .save(output_path + "/" + input_path.split("/").pop())
 
 
 def photo_border_worker(input_path,output_path,rule,source_path=None):
@@ -48,7 +56,10 @@ def folder_func(input_dir:str,output_dir:str,source_dir=None):
     for file in file_list:
         input_path = f"{input_dir}/{file}"
         output_path = f"{output_dir}/{file}"
-        source_path = f"{source_dir}/{file}"
+        if source_dir != None:
+            source_path = f"{source_dir}/{file}"
+        else:
+            source_path = None
         for rule in config['rules']:
             camera_company = JpegAnalyzer(input_path).get_camera_company()
             if camera_company.find(rule['camera_company']) != -1:
