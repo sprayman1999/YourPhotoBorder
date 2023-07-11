@@ -53,7 +53,9 @@ $ python3 ./main.py -c ./configs/default.json -f ./test/test_photo.jpg -o ./outp
 ```
 
 ### Default Config
-```
+<details>
+<summary>点击展开</summary>
+```json
 {
     "border_size": 0, # 边框粗细
     "background": [255,255,255], # 背景颜色
