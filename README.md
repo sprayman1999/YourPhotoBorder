@@ -2,7 +2,7 @@
 > [![hugo-papermod](https://img.shields.io/badge/YourPhotoBorder-@sprayman1999-red)](https://github.com/sprayman1999/YourPhotoBorder)
 > [![license](https://img.shields.io/github/license/sprayman1999/YourPhotoBorder)](https://github.com/sprayman1999/YourPhotoBorder/blob/master/LICENSE)
 > ![language](https://img.shields.io/github/languages/top/sprayman1999/YourPhotoBorder?color=orange)
-## 如果遇到BUG，请及时提交issue，我会尽快处理，感谢🙏
+ - 如果遇到BUG，请及时提交issue，我会尽快处理，感谢🙏
 ## 简述
 我是一名摄影爱好者📷 & 程序员🧑‍💻，在大半夜有感而发，突然想写一个添加相框的自动化程序⚙️，可以给照片带来更进一步的仪式感🎆  
 如果我的工具帮助到了您，也可点个star🌟支持我  
