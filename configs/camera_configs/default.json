@@ -1,5 +1,5 @@
 {
-    "output_quality": 100,
+    "output_quality": 35,
     "config_name": "Nikon",
     "border_size": 0,
     "background": [255,255,255],
@@ -25,7 +25,7 @@
             "font_color": [0,0,0]
         },
         {
-            "label_name": "camera iso",
+            "label_name": "camera args",
             "font_path": "./fonts/AlibabaPuHuiTi-3-55-Regular/AlibabaPuHuiTi-3-55-Regular.ttf",
             "font_size": "3.8%",
             "content": "${FOCAL_LENGTH}m f/${APERTURE} ${EXPOSURE_TIME} ISO${CAMERA_ISO}",

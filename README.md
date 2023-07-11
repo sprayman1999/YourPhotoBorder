@@ -20,13 +20,31 @@ $ python3 -m pip install --requirement requirements.txt
 -sf : 指定引入EXIF的文件夹，导出时会采用该目录同名图片的EXIF
 ```
 
-### 命令如下
+### 单图片处理命令
 ```
-$ python3 ./main.py -c ./configs/default.json -f ./test/test_photo.jpg -o ./output/output.jpg
+$ python3 ./main.py -c ./configs/your_photo_border.json -f ./test/test_photo.jpg -o ./output/output.jpg
+```
+### 批量图片处理命令
+```
+$ python3 ./main.py -c ./configs/your_photo_border.json -f ./test/ -o ./output/
+[*] PhotoPath: ./test/fuzi//output3.jpg OutputPath: ./output//output3.jpg       ExifSourcePath: None/output3.jpg
+[*] PhotoPath: ./test/fuzi//output1.jpg OutputPath: ./output//output1.jpg       ExifSourcePath: None/output1.jpg
+[*] PhotoPath: ./test/fuzi//output5.jpg OutputPath: ./output//output5.jpg       ExifSourcePath: None/output5.jpg
+[*] PhotoPath: ./test/fuzi//output4.jpg OutputPath: ./output//output4.jpg       ExifSourcePath: None/output4.jpg
+[*] PhotoPath: ./test/fuzi//output6.jpg OutputPath: ./output//output6.jpg       ExifSourcePath: None/output6.jpg
+[*] PhotoPath: ./test/fuzi//output7.jpg OutputPath: ./output//output7.jpg       ExifSourcePath: None/output7.jpg
+[*] PhotoPath: ./test/fuzi//output9.jpg OutputPath: ./output//output9.jpg       ExifSourcePath: None/output9.jpg
+[*] PhotoPath: ./test/fuzi//output8.jpg OutputPath: ./output//output8.jpg       ExifSourcePath: None/output8.jpg
+[*] PhotoPath: ./test/fuzi//output2.jpg.JPG     OutputPath: ./output//output2.jpg.JPG   ExifSourcePath: None/output2.jpg.JPG
+[*] All task is finished!
 ```
 ### 样图如下
-以下是我在西湖（HangZhou West Lake）拍摄的照片，用该程序加上相框之后效果如下
-![样图](https://github.com/sprayman1999/YourPhotoBorder/blob/main/output/output.jpg)
+以下照片一部分来自我个人在西湖拍摄，另一部分来自北京一位朋友日常拍摄，用该程序加上相框之后效果如下
+||||
+|-|-|-|
+|![](output/output1.jpg)|![](output/output2.jpg)|![](output/output3.jpg)|
+|![](output/output4.jpg)|![](output/output5.jpg)|![](output/output6.jpg)|
+|![](output/output7.jpg)|![](output/output8.jpg)|![](output/output9.jpg)|
 
 
 
@@ -58,6 +76,8 @@ $ python3 ./main.py -c ./configs/default.json -f ./test/test_photo.jpg -o ./outp
 <summary>点击展开</summary>
 ```json
 {
+    "output_quality": 75,# 导出图片质量
+    "config_name": "NIKON",
     "border_size": 0, # 边框粗细
     "background": [255,255,255], # 背景颜色
     "extra_length": "20%", # 将原有照片的长或宽进行拓展，也可以设置成整数
@@ -115,6 +135,7 @@ $ python3 ./main.py -c ./configs/default.json -f ./test/test_photo.jpg -o ./outp
  - 绘图代码核心
  - 配置文件初步确定
  - 输出简单的样例
+ - 多进程处理图片
 
 ## 未来计划 TODO
  - 完善config格式
