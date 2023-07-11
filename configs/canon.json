@@ -1,4 +1,5 @@
 {
+    "config_name": "Canon",
     "border_size": 0,
     "background": [255,255,255],
     "extra_length": "20%",
