@@ -1,5 +1,5 @@
 # YourPhotoBorder
-> [![hugo-papermod](https://img.shields.io/badge/YourPhotoBorder-@sprayman1999)](https://github.com/sprayman1999/YourPhotoBorder)
+> [![hugo-papermod](https://img.shields.io/badge/YourPhotoBorder-@sprayman1999-red)](https://github.com/sprayman1999/YourPhotoBorder)
 > [![license](https://img.shields.io/github/license/sprayman1999/YourPhotoBorder)](https://github.com/sprayman1999/YourPhotoBorder/blob/master/LICENSE)
 > ![language](https://img.shields.io/github/languages/top/sprayman1999/YourPhotoBorder?color=orange)
 ## 如果遇到BUG，请及时提交issue，我会尽快处理，感谢🙏
