@@ -23,9 +23,11 @@ def load_config(path) -> dict:
     with open(path,"r") as f:
         return json.loads(f.read())
     
-def test(photo_path,output_path):
-    pass
-    #PhotoBorder(photo_path,config).generate().save(output_path)
+def test(input_path,output_path,source_path):
+    for rule in config['rules']:
+        camera_company = JpegAnalyzer(input_path).get_camera_company()
+        if camera_company.find(rule['camera_company']) != -1:
+            PhotoBorder(input_path,config,source_exif_path=source_path).generate().save(output_path)
 
 
 def worker(input_path,output_path,rule,source_path=None):
