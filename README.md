@@ -74,6 +74,7 @@ $ python3 ./main.py -c ./configs/your_photo_border.json -f ./test/ -o ./output/
 ### Default Config
 <details>
 <summary>点击展开</summary>
+
 ```json
 {
     "output_quality": 75,# 导出图片质量
@@ -128,6 +129,7 @@ $ python3 ./main.py -c ./configs/your_photo_border.json -f ./test/ -o ./output/
     ]
 }
 ```
+
 </details>
 
 ## 已完成开发
