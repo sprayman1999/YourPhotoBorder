@@ -143,6 +143,7 @@ $ python3 ./main.py -c ./configs/your_photo_border.json -f ./test/ -o ./output/
  - 配置文件初步确定
  - 输出简单的样例
  - 多进程处理图片
+ - 批量导入导出图片
 
 ## 未来计划 TODO
  - 完善config格式
@@ -153,7 +154,7 @@ $ python3 ./main.py -c ./configs/your_photo_border.json -f ./test/ -o ./output/
  - 图片渲染可能存在乱序，需要设定level来限制渲染顺序
  - 背景可设置成图片
  - 手机照片目前还不支持
- - 批量导入导出图片
+
 
 ## BUG
  - sRGB JPEG导出后和原图相比，暗部会偏白
