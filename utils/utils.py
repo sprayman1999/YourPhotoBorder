@@ -1,5 +1,8 @@
 from datetime import datetime
 import time
+import sys
+if __name__ != "__main__":
+    sys.path.append("../")
 def percent2float(percent):
     if isinstance(percent,str):
         if percent.endswith("%"):

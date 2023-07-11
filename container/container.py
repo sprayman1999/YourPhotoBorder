@@ -186,7 +186,7 @@ class PhotoBorder(object):
         return self
     
     def save(self,path):
-        self.canvas.save("./output/output.jpg",format="JPEG")
+        self.canvas.save(path,format="JPEG",quality=self.config['output_quality'])
         
 def test():
     pass

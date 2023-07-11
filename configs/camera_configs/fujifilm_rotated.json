@@ -1,7 +1,8 @@
 {
+    "output_quality": 100,
     "border_size": 0,
     "background": [255,255,255],
-    "extra_length": "20%",
+    "extra_length": "15%",
     "camera_args_direction": "down",
     "original_time_format": "%Y:%m:%d %H:%M:%S",
     "target_time_format": "%Y-%m-%d %H:%M:%S",
@@ -9,41 +10,49 @@
         {
             "label_name": "camera model label",
             "font_path": "./fonts/AlibabaPuHuiTi-3-75-SemiBold/AlibabaPuHuiTi-3-75-SemiBold.ttf",
-            "font_size": "4.5%",
+            "font_size": "2.5%",
             "content": "${CAMERA_MODEL}",
-            "position_offset": ["3%","5%"],
+            "position_offset": ["3.5%","7%"],
             "font_color": [0,0,0]
         },
         {
             "label_name": "photo original datetime",
             "font_path": "./fonts/AlibabaPuHuiTi-3-45-Light/AlibabaPuHuiTi-3-45-Light.ttf",
-            "font_size": "2.5%",
+            "font_size": "1.5%",
             "content": "${PHOTO_ORIGINAL_DATETIME}",
-            "position_offset": ["3%","10%"],
+            "position_offset": ["3.5%","11%"],
             "font_color": [0,0,0]
         },
         {
             "label_name": "camera iso",
             "font_path": "./fonts/AlibabaPuHuiTi-3-55-Regular/AlibabaPuHuiTi-3-55-Regular.ttf",
-            "font_size": "3.8%",
+            "font_size": "2.2%",
             "content": "${FOCAL_LENGTH}m f/${APERTURE} ${EXPOSURE_TIME} ISO${CAMERA_ISO}",
-            "position_offset": ["68%","3.75%"],
+            "position_offset": ["45%","2.5%"],
             "font_color": [0,0,0]
         },
         {
             "label_name": "camera lens model",
             "font_path": "./fonts/AlibabaPuHuiTi-3-45-Light/AlibabaPuHuiTi-3-45-Light.ttf",
-            "font_size": "3.5%",
+            "font_size": "1.8%",
             "content": "${CAMERA_LENS_MODEL}",
-            "position_offset": ["68%","10%"],
+            "position_offset": ["45%","5.5%"],
+            "font_color": [0,0,0]
+        },
+        {
+            "label_name": "camera sentence",
+            "font_path": "./fonts/AlibabaPuHuiTi-3-75-SemiBold/AlibabaPuHuiTi-3-75-SemiBold.ttf",
+            "font_size": "2.8%",
+            "content": "专业级表现，如眼所见！",
+            "position_offset": ["45%","9%"],
             "font_color": [0,0,0]
         }
     ],
     "photos": [
         {
             "path": "./assets/camera_logos/FUJIFILM/logo.jpeg",
-            "position_offset": ["32%","0%"],
-            "scale": "35%"
+            "position_offset": ["-38%","-3%"],
+            "scale": "30%"
         }
     ]
 }

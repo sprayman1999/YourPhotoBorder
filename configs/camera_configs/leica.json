@@ -1,5 +1,5 @@
 {
-    "config_name": "Nikon",
+    "output_quality": 100,
     "border_size": 0,
     "background": [255,255,255],
     "extra_length": "20%",
@@ -42,9 +42,9 @@
     ],
     "photos": [
         {
-            "path": "./assets/camera_logos/NIKON/logo.png",
+            "path": "./assets/camera_logos/Leica/logo.gif",
             "position_offset": ["55%","0%"],
-            "scale": "65%"
+            "scale": "85%"
         }
     ]
 }

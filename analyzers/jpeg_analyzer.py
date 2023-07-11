@@ -2,10 +2,15 @@ import exifread
 from PIL import Image, ImageDraw, ImageFont
 
 class JpegAnalyzer(object):
-    def __init__(self,path):
+    def __init__(self,path,exif_source_path=None):
         self.path = path
-        with open(self.path, 'rb') as f:
-            self.tags = exifread.process_file(f)
+        self.exif_source_path = exif_source_path
+        if exif_source_path == None:
+            with open(self.path, 'rb') as f:
+                self.tags = exifread.process_file(f)
+        else:
+            with open(self.exif_source_path, 'rb') as f:
+                self.tags = exifread.process_file(f)
 
     def get_camera_model(self) -> str:
         '''
@@ -39,18 +44,28 @@ class JpegAnalyzer(object):
         return str(self.tags['EXIF LensModel'])
     
     def get_width(self) -> int:
+        tags = self.tags
+        ## 拦截hook
+        if self.exif_source_path != None:
+            with open(self.path, 'rb') as f:
+                tags = exifread.process_file(f)
         orientation = self.get_image_orientation()
         if orientation[0] == 'Horizontal':
-            return int(str(self.tags['EXIF ExifImageWidth']))
+            return int(str(tags['EXIF ExifImageWidth']))
         else:
-            return int(str(self.tags['EXIF ExifImageLength']))
+            return int(str(tags['EXIF ExifImageLength']))
     
     def get_height(self) -> int:
+        tags = self.tags
+        ## 拦截hook
+        if self.exif_source_path != None:
+            with open(self.path, 'rb') as f:
+                tags = exifread.process_file(f)
         orientation = self.get_image_orientation()
         if orientation[0] == 'Horizontal':
-            return int(str(self.tags['EXIF ExifImageLength']))
+            return int(str(tags['EXIF ExifImageLength']))
         else:
-            return int(str(self.tags['EXIF ExifImageWidth']))
+            return int(str(tags['EXIF ExifImageWidth']))
     
     def get_original_datetime(self):
         return str(self.tags['EXIF DateTimeOriginal'])
@@ -75,11 +90,22 @@ class JpegAnalyzer(object):
         # Horizontal normal
         # CCW 逆时针旋转
         # CW  顺时针
-        orientation = str(self.tags['Image Orientation']).strip().split(" ")
+        
+        
+        tags = self.tags
+        ## 拦截hook
+        if self.exif_source_path != None:
+            with open(self.path, 'rb') as f:
+                tags = exifread.process_file(f)
+                
+        orientation = str(tags['Image Orientation']).strip().split(" ")
         if len(orientation) == 2:
             return (orientation[0],orientation[1])
         else:
             return (orientation[0],int(orientation[1]),orientation[2])
+    def get_camera_company(self) -> str:
+        return str(self.tags['Image Make'])
+    
 def test():
     #test_jpeg_path = '../test/DSC00524.JPG'
     #test_jpeg_path = "../test/test_photo.jpg"
@@ -97,6 +123,7 @@ def test():
     print(f"Height: {analyzer.get_height()}")
     print(f"Time: {analyzer.get_original_datetime()}")
     print(f"Orientation: {analyzer.get_image_orientation()}")
+    print(f"Camera Company: {analyzer.get_camera_company()}")
     
     
 def main():

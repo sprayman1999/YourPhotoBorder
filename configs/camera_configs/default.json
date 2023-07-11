@@ -1,5 +1,6 @@
 {
-    "config_name": "Canon",
+    "output_quality": 100,
+    "config_name": "Nikon",
     "border_size": 0,
     "background": [255,255,255],
     "extra_length": "20%",
@@ -42,9 +43,9 @@
     ],
     "photos": [
         {
-            "path": "./assets/camera_logos/Canon/logo.png",
-            "position_offset": ["48%","0%"],
-            "scale": "45%"
+            "path": "./assets/camera_logos/NIKON/logo.png",
+            "position_offset": ["55%","0%"],
+            "scale": "65%"
         }
     ]
 }
