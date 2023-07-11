@@ -1,26 +1,17 @@
-import piexif
 import exifread
+from PIL import Image, ImageDraw, ImageFont
+
 class JpegAnalyzer(object):
     def __init__(self,path):
         self.path = path
-    def get_exif(self):
         with open(self.path, 'rb') as f:
-            tags = exifread.process_file(f)
-        
-        '''
-        for i in tags:
-            
-            if tags[i].encode().find("NIKON"):
-                print(f"{i}: {tags[i]}")
-        '''
-    
+            self.tags = exifread.process_file(f)
+
     def get_camera_model(self) -> str:
         '''
         获取相机型号
         '''
-        with open(self.path, 'rb') as f:
-            tags = exifread.process_file(f)
-        return str(tags['Image Model'])
+        return str(self.tags['Image Model'])
     
     def get_camera_iso(self) -> str:
         '''
@@ -28,12 +19,10 @@ class JpegAnalyzer(object):
         '''
         with open(self.path, 'rb') as f:
             tags = exifread.process_file(f)
-        return str(tags['EXIF ISOSpeedRatings'])
+        return str(self.tags['EXIF ISOSpeedRatings'])
     
     def get_camera_aperture(self) -> str:
-        with open(self.path, 'rb') as f:
-            tags = exifread.process_file(f)
-        aperture = str(tags['EXIF FNumber'])
+        aperture = str(self.tags['EXIF FNumber'])
         if aperture.isdigit():
             return aperture
         else:
@@ -41,40 +30,61 @@ class JpegAnalyzer(object):
             return str(int(aperture_array[0]) / int(aperture_array[1]))
     
     def get_camera_exposure_time(self) -> str:
-        with open(self.path, 'rb') as f:
-            tags = exifread.process_file(f)
-        return str(tags['EXIF ExposureTime'])
+        return str(self.tags['EXIF ExposureTime'])
     
     def get_camera_lens_model(self) -> str:
-        with open(self.path, 'rb') as f:
-            tags = exifread.process_file(f)
-        return str(tags['EXIF LensModel'])
+        return str(self.tags['EXIF LensModel'])
     
     def get_width(self) -> int:
-        with open(self.path, 'rb') as f:
-            tags = exifread.process_file(f)
-        return int(str(tags['EXIF ExifImageWidth']))
+        orientation = self.get_image_orientation()
+        if orientation[0] == 'Horizontal':
+            return int(str(self.tags['EXIF ExifImageWidth']))
+        else:
+            return int(str(self.tags['EXIF ExifImageLength']))
     
     def get_height(self) -> int:
-        with open(self.path, 'rb') as f:
-            tags = exifread.process_file(f)
-        return int(str(tags['EXIF ExifImageLength']))
+        orientation = self.get_image_orientation()
+        if orientation[0] == 'Horizontal':
+            return int(str(self.tags['EXIF ExifImageLength']))
+        else:
+            return int(str(self.tags['EXIF ExifImageWidth']))
     
     def get_original_datetime(self):
-        with open(self.path, 'rb') as f:
-            tags = exifread.process_file(f)
-        return str(tags['EXIF DateTimeOriginal'])
+        return str(self.tags['EXIF DateTimeOriginal'])
     
     def get_camera_focal_length(self) -> str:
-        with open(self.path, 'rb') as f:
-            tags = exifread.process_file(f)
-        return int(str(tags['EXIF FocalLength']))
+        focal_length = str(self.tags['EXIF FocalLength'])
+        if focal_length.isdigit():
+            
+            return int(focal_length)
+        else:
+            focal_length_array = focal_length.split("/")
+            return str(int(focal_length_array[0]) / int(focal_length_array[1]))
         
+    def get_image_format(self) -> str:
+        image = Image.open(self.path)
+        image_format = str(image.format)
+        image.close()
+        return image_format
         
+    def get_image_orientation(self) -> tuple:
+        # Rotated 90 CCW
+        # Horizontal normal
+        # CCW 逆时针旋转
+        # CW  顺时针
+        orientation = str(self.tags['Image Orientation']).strip().split(" ")
+        if len(orientation) == 2:
+            return (orientation[0],orientation[1])
+        else:
+            return (orientation[0],int(orientation[1]),orientation[2])
 def test():
     #test_jpeg_path = '../test/DSC00524.JPG'
-    test_jpeg_path = "../test/test_photo.jpg"
+    #test_jpeg_path = "../test/test_photo.jpg"
+    #test_jpeg_path = "../output/output.jpg"
+    test_jpeg_path = "../test/0711_1.jpg"
+    
     analyzer = JpegAnalyzer(test_jpeg_path)
+    print(f"Image Format: {analyzer.get_image_format()}")
     print(f"Camera Model: {analyzer.get_camera_model()}")
     print(f"Lens Camera Model: {analyzer.get_camera_lens_model()}")
     print(f"ISO: {analyzer.get_camera_iso()}")
@@ -83,6 +93,9 @@ def test():
     print(f"Width: {analyzer.get_width()}")
     print(f"Height: {analyzer.get_height()}")
     print(f"Time: {analyzer.get_original_datetime()}")
+    print(f"Orientation: {analyzer.get_image_orientation()}")
+    
+    
 def main():
     test()
 if __name__ == '__main__':

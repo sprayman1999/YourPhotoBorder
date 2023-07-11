@@ -6,12 +6,21 @@ from analyzers.jpeg_analyzer import *
 from analyzers.png_analyzer import *
 from utils.utils import *
 from PIL import Image, ImageDraw, ImageFont
+import imghdr
 
 class PhotoBorder(object):
-    def __init__(self,path:str ,config:dict):
+    def __init__(self,path:str ,config:dict,source_exif_path: str = ""):
+        if source_exif_path == "":
+            self.source_exif_path = path
+        else:
+            self.source_exif_path = source_exif_path
+            
+        
         self.path = path
-        self.analyzer = JpegAnalyzer(path)
+        if path.lower().endswith(".jpg") or path.endswith(".jpeg"):
+            self.analyzer = JpegAnalyzer(path)
         self.config = config
+        
         
         # 二次修正数据
         self.fix_config()
@@ -154,7 +163,15 @@ class PhotoBorder(object):
         image = Image.open(self.path)
         
         # 把原始照片粘贴到画布上
+        ## 是否需要旋转
+        orientation = self.analyzer.get_image_orientation()
+        if orientation[0] == 'Rotated' and orientation[2] == 'CCW':
+            image = image.rotate(angle=float(orientation[1]),expand=True)
+        if orientation[0] == 'Rotated' and orientation[2] == 'CW':
+            image = image.rotate(angle=float(360.0 - orientation[1]),expand=True)
+        
         canvas.paste(image,self.get_photo_position())
+        
         image.close()
         
         # 粘贴图片组
