@@ -22,6 +22,9 @@ class JpegAnalyzer(object):
         return str(self.tags['EXIF ISOSpeedRatings'])
     
     def get_camera_aperture(self) -> str:
+        '''
+        获取照片的光圈
+        '''
         aperture = str(self.tags['EXIF FNumber'])
         if aperture.isdigit():
             return aperture

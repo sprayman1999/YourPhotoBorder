@@ -1,8 +1,8 @@
 # YourPhotoBorder
+## 如果遇到BUG，请及时提交issue，我会尽快处理，感谢🙏
 ## 简述
 我是一名摄影爱好者📷 & 程序员🧑‍💻，在大半夜有感而发，突然想写一个添加相框的自动化程序⚙️，可以给照片带来更进一步的仪式感🎆  
 如果我的工具帮助到了您，也可点个star🌟支持我  
-
 ## 使用教程
 ### 环境配置
 首先需要安装[Python3](https://www.python.org/downloads/)
@@ -15,8 +15,9 @@ $ python3 -m pip install --requirement requirements.txt
 ### 命令参数
 ```
 -c : 指定配置文件
--f : 指定输入图片
--o : 指定输出位置
+-f : 指定输入图片或文件夹
+-o : 指定输出位置或文件夹
+-sf : 指定引入EXIF的文件夹，导出时会采用该目录同名图片的EXIF
 ```
 
 ### 命令如下
@@ -107,14 +108,15 @@ $ python3 ./main.py -c ./configs/default.json -f ./test/test_photo.jpg -o ./outp
     ]
 }
 ```
+</details>
 
-## FINISHED
+## 已完成开发
  - JPEG解析器
  - 绘图代码核心
  - 配置文件初步确定
  - 输出简单的样例
 
-## TODO
+## 未来计划 TODO
  - 完善config格式
  - 完善各类相机厂家的logo数据
  - 相机厂家logo可被裁切成各种形状，比如圆形
