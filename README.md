@@ -57,7 +57,7 @@ $ python3 ./main.py -c ./configs/your_photo_border.json -f ./test/ -o ./output/
  - default.json
  - nikon_1930s.json
  - nikon_1949.json
- - canon.json
+ - canon_rotated.json
  - fujifilm.json
  - fujifilm_rotated.json
  - hasselblad.json
