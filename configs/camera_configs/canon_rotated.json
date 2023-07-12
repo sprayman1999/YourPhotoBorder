@@ -1,9 +1,9 @@
 {
     "output_quality": 100,
-    "config_name": "Canon",
+    "config_name": "Canon Rotated",
     "border_size": 0,
     "background": [255,255,255],
-    "extra_length": "20%",
+    "extra_length": "15%",
     "camera_args_direction": "down",
     "original_time_format": "%Y:%m:%d %H:%M:%S",
     "target_time_format": "%Y-%m-%d %H:%M:%S",
@@ -11,41 +11,49 @@
         {
             "label_name": "camera model label",
             "font_path": "./fonts/AlibabaPuHuiTi-3-75-SemiBold/AlibabaPuHuiTi-3-75-SemiBold.ttf",
-            "font_size": "4.5%",
+            "font_size": "3%",
             "content": "${CAMERA_MODEL}",
-            "position_offset": ["3%","3%"],
+            "position_offset": ["3.5%","7%"],
             "font_color": [0,0,0]
         },
         {
             "label_name": "photo original datetime",
             "font_path": "./fonts/AlibabaPuHuiTi-3-45-Light/AlibabaPuHuiTi-3-45-Light.ttf",
-            "font_size": "3%",
+            "font_size": "1.5%",
             "content": "${PHOTO_ORIGINAL_DATETIME}",
-            "position_offset": ["3%","9%"],
+            "position_offset": ["3.5%","11%"],
             "font_color": [0,0,0]
         },
         {
             "label_name": "camera args",
             "font_path": "./fonts/AlibabaPuHuiTi-3-55-Regular/AlibabaPuHuiTi-3-55-Regular.ttf",
-            "font_size": "3.5%",
+            "font_size": "2.2%",
             "content": "${FOCAL_LENGTH}m f/${APERTURE} ${EXPOSURE_TIME} ISO${CAMERA_ISO}",
-            "position_offset": ["68%","3.75%"],
+            "position_offset": ["55 %","2.5%"],
             "font_color": [0,0,0]
         },
         {
             "label_name": "camera lens model",
             "font_path": "./fonts/AlibabaPuHuiTi-3-45-Light/AlibabaPuHuiTi-3-45-Light.ttf",
-            "font_size": "3.5%",
+            "font_size": "1.8%",
             "content": "${CAMERA_LENS_MODEL}",
-            "position_offset": ["68%","10%"],
+            "position_offset": ["55%","5.6%"],
+            "font_color": [0,0,0]
+        },
+        {
+            "label_name": "camera sentence",
+            "font_path": "./fonts/AlibabaPuHuiTi-3-75-SemiBold/AlibabaPuHuiTi-3-75-SemiBold.ttf",
+            "font_size": "2.8%",
+            "content": "佳能感动常在！",
+            "position_offset": ["55%","9%"],
             "font_color": [0,0,0]
         }
     ],
     "photos": [
         {
             "path": "./assets/camera_logos/Canon/logo.png",
-            "position_offset": ["48%","-1%"],
-            "scale": "45%"
+            "position_offset": ["-8%","-3.8%"],
+            "scale": "50%"
         }
     ]
 }
