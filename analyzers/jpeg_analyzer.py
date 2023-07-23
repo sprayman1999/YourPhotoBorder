@@ -44,28 +44,47 @@ class JpegAnalyzer(object):
         return str(self.tags['EXIF LensModel'])
     
     def get_width(self) -> int:
+        image = Image.open(self.path)
+        width = image.width
+        image.close()
+        return width
+        '''
         tags = self.tags
         ## 拦截hook
         if self.exif_source_path != None:
-            with open(self.path, 'rb') as f:
-                tags = exifread.process_file(f)
+            image = Image.open(self.path)
+            width = image.width
+            image.close()
+            return width
         orientation = self.get_image_orientation()
         if orientation[0] == 'Horizontal':
             return int(str(tags['EXIF ExifImageWidth']))
         else:
             return int(str(tags['EXIF ExifImageLength']))
+        '''
+
     
     def get_height(self) -> int:
+        image = Image.open(self.path)
+        height = image.height
+        image.close()
+        return height
+        '''
         tags = self.tags
         ## 拦截hook
         if self.exif_source_path != None:
-            with open(self.path, 'rb') as f:
-                tags = exifread.process_file(f)
+            image = Image.open(self.path)
+            height = image.height
+            image.close()
+            return height
         orientation = self.get_image_orientation()
+        print(tags.keys())
         if orientation[0] == 'Horizontal':
             return int(str(tags['EXIF ExifImageLength']))
         else:
             return int(str(tags['EXIF ExifImageWidth']))
+        '''
+
     
     def get_original_datetime(self):
         return str(self.tags['EXIF DateTimeOriginal'])
