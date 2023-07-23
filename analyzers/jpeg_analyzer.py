@@ -97,7 +97,8 @@ class JpegAnalyzer(object):
         if self.exif_source_path != None:
             with open(self.path, 'rb') as f:
                 tags = exifread.process_file(f)
-                
+        if 'Image Orientation' not in tags:
+            return ('Horizontal','normal')
         orientation = str(tags['Image Orientation']).strip().split(" ")
         if len(orientation) == 2:
             return (orientation[0],orientation[1])
