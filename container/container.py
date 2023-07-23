@@ -18,7 +18,11 @@ class PhotoBorder(object):
         
         self.path = path
         if path.lower().endswith(".jpg") or path.endswith(".jpeg"):
-            self.analyzer = JpegAnalyzer(path)
+            if self.source_exif_path == None or self.source_exif_path == '':
+                
+                self.analyzer = JpegAnalyzer(path)
+            else:
+                self.analyzer = JpegAnalyzer(source_exif_path)
         self.config = config
         
         
