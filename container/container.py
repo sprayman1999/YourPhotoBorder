@@ -22,7 +22,7 @@ class PhotoBorder(object):
                 
                 self.analyzer = JpegAnalyzer(path)
             else:
-                self.analyzer = JpegAnalyzer(source_exif_path)
+                self.analyzer = JpegAnalyzer(path=path,source_exif_path=source_exif_path)
         self.config = config
         
         
