@@ -25,7 +25,7 @@ def load_config(path) -> dict:
     
 def test(input_path,output_path,source_path):
     for rule in config['rules']:
-        local_source_path = input_path if not (source_path == input_path or source_path == None or source_path == "") else source_path
+        local_source_path = input_path if source_path == input_path or source_path == None or source_path == "" else source_path
         
         camera_company = JpegAnalyzer(local_source_path).get_camera_company()
         if camera_company.find(rule['camera_company']) != -1:
