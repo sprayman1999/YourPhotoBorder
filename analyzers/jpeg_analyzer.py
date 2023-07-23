@@ -47,7 +47,7 @@ class JpegAnalyzer(object):
         tags = self.tags
         ## 拦截hook
         if self.exif_source_path != None:
-            with open(self.exif_source_path, 'rb') as f:
+            with open(self.path, 'rb') as f:
                 tags = exifread.process_file(f)
         orientation = self.get_image_orientation()
         if orientation[0] == 'Horizontal':
@@ -59,7 +59,7 @@ class JpegAnalyzer(object):
         tags = self.tags
         ## 拦截hook
         if self.exif_source_path != None:
-            with open(self.exif_source_path, 'rb') as f:
+            with open(self.path, 'rb') as f:
                 tags = exifread.process_file(f)
         orientation = self.get_image_orientation()
         if orientation[0] == 'Horizontal':
