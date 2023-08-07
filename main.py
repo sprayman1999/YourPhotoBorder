@@ -30,19 +30,21 @@ def photo_border_single_worker(input_path,output_path,source_path):
     if camera_company == None:
         camera_company = args.default_image_maker
     border_config = None
+    target_rule = None
     
     for rule in config['rules']:
-        if camera_company.lower().find(rule['camera_company'].lower()):
-            border_config = rule['camera_horizontal_config']
+        if camera_company.lower().find(rule['camera_company'].lower()) != -1:
+            target_rule = rule
             break
-    if border_config == None:
-        print(f"[X] failed to generate photo because of null border_config.\n\tPhotoPath: {input_path}\tOutputPath: {output_path}\tExifSourcePath: {local_source_path}")
+    print(camera_company)
+    if target_rule == None:
+        print(f"[X] failed to generate photo because of null \"Image Maker\".\n\tPhotoPath: {input_path}\tOutputPath: {output_path}\tExifSourcePath: {local_source_path}")
         return
     print(f"[*] PhotoPath: {input_path}\tOutputPath: {output_path}\tExifSourcePath: {local_source_path}")
     if JpegAnalyzer(local_source_path).get_image_orientation()[0] == 'Horizontal':
-        border_config = rule['camera_horizontal_config']
+        border_config = target_rule['camera_horizontal_config']
     else:
-        border_config = rule['camera_rotated_config']
+        border_config = target_rule['camera_rotated_config']
     with open(border_config,"r") as f:
         PhotoBorder(f"{input_path}",json.loads(f.read()),source_exif_path=local_source_path) \
             .generate() \
