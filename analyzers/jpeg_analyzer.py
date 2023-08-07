@@ -48,44 +48,13 @@ class JpegAnalyzer(object):
         width = image.width
         image.close()
         return width
-        '''
-        tags = self.tags
-        ## 拦截hook
-        if self.exif_source_path != None:
-            image = Image.open(self.path)
-            width = image.width
-            image.close()
-            return width
-        orientation = self.get_image_orientation()
-        if orientation[0] == 'Horizontal':
-            return int(str(tags['EXIF ExifImageWidth']))
-        else:
-            return int(str(tags['EXIF ExifImageLength']))
-        '''
-
-    
+        
     def get_height(self) -> int:
         image = Image.open(self.path)
         height = image.height
         image.close()
         return height
-        '''
-        tags = self.tags
-        ## 拦截hook
-        if self.exif_source_path != None:
-            image = Image.open(self.path)
-            height = image.height
-            image.close()
-            return height
-        orientation = self.get_image_orientation()
-        print(tags.keys())
-        if orientation[0] == 'Horizontal':
-            return int(str(tags['EXIF ExifImageLength']))
-        else:
-            return int(str(tags['EXIF ExifImageWidth']))
-        '''
-
-    
+        
     def get_original_datetime(self):
         return str(self.tags['EXIF DateTimeOriginal'])
     
@@ -124,12 +93,11 @@ class JpegAnalyzer(object):
         else:
             return (orientation[0],int(orientation[1]),orientation[2])
     def get_camera_company(self) -> str:
+        if 'Image Make' not in self.tags:
+            return None
         return str(self.tags['Image Make'])
     
 def test():
-    #test_jpeg_path = '../test/DSC00524.JPG'
-    #test_jpeg_path = "../test/test_photo.jpg"
-    #test_jpeg_path = "../output/output.jpg"
     test_jpeg_path = "../test/0711_1.jpg"
     
     analyzer = JpegAnalyzer(test_jpeg_path)
@@ -150,38 +118,3 @@ def main():
     test()
 if __name__ == '__main__':
     main()
-'''
-import exifread
-
-# 打开JPEG文件
-with open("your_image.jpg", 'rb') as f:
-    # 读取EXIF数据
-    tags = exifread.process_file(f)
-
-# 获取相机参数
-if 'Image Model' in tags:
-    camera_model = tags['Image Model']
-else:
-    camera_model = 'Unknown'
-
-if 'EXIF ExposureTime' in tags:
-    exposure_time = tags['EXIF ExposureTime']
-else:
-    exposure_time = 'Unknown'
-
-if 'EXIF FNumber' in tags:
-    aperture = tags['EXIF FNumber']
-else:
-    aperture = 'Unknown'
-
-if 'EXIF ISOSpeedRatings' in tags:
-    iso = tags['EXIF ISOSpeedRatings']
-else:
-    iso = 'Unknown'
-
-# 打印相机参数
-print("Camera Model:", camera_model)
-print("Exposure Time:", exposure_time)
-print("Aperture:", aperture)
-print("ISO:", iso)
-'''
