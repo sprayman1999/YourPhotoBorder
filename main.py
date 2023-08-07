@@ -17,41 +17,41 @@ def init_argparse():
     parser.add_argument("-f","--file",help="load photo",required=False)
     parser.add_argument("-sf","--source-file",help="source photo with exif",required=False)
     parser.add_argument("-o","--output",help="save photo",required=True)
+    parser.add_argument("-dim","--default-image-maker",help="default image maker",required=False)
     args = parser.parse_args()
     
 def load_config(path) -> dict:
     with open(path,"r") as f:
         return json.loads(f.read())
     
-def test(input_path,output_path,source_path):
+def photo_border_single_worker(input_path,output_path,source_path):
+    local_source_path = input_path if source_path == input_path or source_path == None or source_path == "" else source_path
+    camera_company = JpegAnalyzer(local_source_path).get_camera_company()
+    if camera_company == None:
+        camera_company = args.default_image_maker
+    border_config = None
+    
     for rule in config['rules']:
-        local_source_path = input_path if source_path == input_path or source_path == None or source_path == "" else source_path
-        
-        camera_company = JpegAnalyzer(local_source_path).get_camera_company()
-        if camera_company.find(rule['camera_company']) != -1:
-            print(f"[*] PhotoPath: {input_path}\tOutputPath: {output_path}\tExifSourcePath: {local_source_path}")
-            
-                
-            if JpegAnalyzer(local_source_path).get_image_orientation()[0] == 'Horizontal':
-                border_config = rule['camera_horizontal_config']
-            else:
-                border_config = rule['camera_rotated_config']
-            with open(border_config,"r") as f:
-                PhotoBorder(f"{input_path}",json.loads(f.read()),source_exif_path=local_source_path) \
-                    .generate() \
-                    .save(output_path + os.sep + input_path.split(os.sep).pop())
-
-
-def photo_border_worker(input_path,output_path,rule,source_path=None):
-    print(f"[*] PhotoPath: {input_path}\tOutputPath: {output_path}\tExifSourcePath: {source_path}")
-    if JpegAnalyzer(input_path).get_image_orientation()[0] == 'Horizontal':
+        if camera_company.lower().find(rule['camera_company'].lower()):
+            border_config = rule['camera_horizontal_config']
+            break
+    if border_config == None:
+        print(f"[X] failed to generate photo because of null border_config.\n\tPhotoPath: {input_path}\tOutputPath: {output_path}\tExifSourcePath: {local_source_path}")
+        return
+    print(f"[*] PhotoPath: {input_path}\tOutputPath: {output_path}\tExifSourcePath: {local_source_path}")
+    if JpegAnalyzer(local_source_path).get_image_orientation()[0] == 'Horizontal':
         border_config = rule['camera_horizontal_config']
     else:
         border_config = rule['camera_rotated_config']
     with open(border_config,"r") as f:
-        PhotoBorder(f"{input_path}",json.loads(f.read()),source_exif_path=source_path) \
+        PhotoBorder(f"{input_path}",json.loads(f.read()),source_exif_path=local_source_path) \
             .generate() \
             .save(output_path)
+
+
+def photo_border_worker(input_path,output_path,source_path=None):
+    photo_border_single_worker(input_path=input_path,output_path=output_path,source_path=source_path)
+
     
 def folder_func(input_dir:str,output_dir:str,source_dir=None):
     white_list = ['.jpeg','.jpg']
@@ -61,14 +61,11 @@ def folder_func(input_dir:str,output_dir:str,source_dir=None):
         input_path = f"{input_dir}{os.sep}{file}"
         output_path = f"{output_dir}{os.sep}{file}"
         if source_dir != None:
-            source_path = f"{source_dir}/{file}"
+            source_path = f"{source_dir}{os.sep}{file}"
         else:
             source_path = None
-        for rule in config['rules']:
-            camera_company = JpegAnalyzer(input_path).get_camera_company()
-            if camera_company.find(rule['camera_company']) != -1:
-                pool.apply_async(photo_border_worker, (input_path,output_path,rule,source_path))
-                break
+        pool.apply_async(photo_border_worker, (input_path,output_path,source_path))
+        #photo_border_worker(input_path,output_path,source_path)
     pool.close()
     pool.join()
     
