@@ -159,8 +159,6 @@ class PhotoBorder(object):
         self.canvas_width = self.get_canvas_width()
         self.canvas_height = self.get_canvas_height()
         self.canvas_color = self.get_canvas_background()
-        print(self.canvas_width)
-        print(self.canvas_height)
         
         # 创建画布
         canvas = Image.new("RGB",(self.canvas_width,self.canvas_height),self.canvas_color)
