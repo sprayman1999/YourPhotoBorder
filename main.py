@@ -18,6 +18,7 @@ def init_argparse():
     parser.add_argument("-sf","--source-file",help="source photo with exif",required=False)
     parser.add_argument("-o","--output",help="save photo",required=True)
     parser.add_argument("-dim","--default-image-maker",help="default image maker",required=False)
+    parser.add_argument("-ec","--enforce-config",help="enforce to set photo's config",required=False)
     args = parser.parse_args()
     
 def load_config(path) -> dict:
@@ -26,7 +27,8 @@ def load_config(path) -> dict:
     
 def photo_border_single_worker(input_path,output_path,source_path):
     local_source_path = input_path if source_path == input_path or source_path == None or source_path == "" else source_path
-    camera_company = JpegAnalyzer(local_source_path).get_camera_company()
+    analyzer = JpegAnalyzer(local_source_path)
+    camera_company = analyzer.get_camera_company()
     if camera_company == None:
         camera_company = args.default_image_maker
     border_config = None
@@ -40,7 +42,7 @@ def photo_border_single_worker(input_path,output_path,source_path):
         print(f"[X] failed to generate photo because of null \"Image Maker\".\n\tPhotoPath: {input_path}\tOutputPath: {output_path}\tExifSourcePath: {local_source_path}")
         return
 
-    if JpegAnalyzer(local_source_path).get_image_orientation()[0] == 'Horizontal':
+    if analyzer.get_image_orientation()[0] == 'Horizontal' and analyzer.get_width() > analyzer.get_height():
         border_config = target_rule['camera_horizontal_config']
     else:
         border_config = target_rule['camera_rotated_config']
@@ -88,7 +90,7 @@ def main():
             exit(-1)
         folder_func(args.file,args.output,args.source_file)
     else:
-        test(args.file,args.output,args.source_file)
+        photo_border_single_worker(args.file,args.output,args.source_file)
     
 if __name__ == "__main__":
     main()
