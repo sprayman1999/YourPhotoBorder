@@ -46,15 +46,50 @@ class JpegAnalyzer(object):
     def get_width(self) -> int:
         image = Image.open(self.path)
         width = image.width
+        if self.get_image_orientation()[0] == 'Rotated':
+            width = image.height
         image.close()
         return width
-        
+        '''
+        tags = self.tags
+        ## 拦截hook
+        if self.exif_source_path != None:
+            image = Image.open(self.path)
+            width = image.width
+            image.close()
+            return width
+        orientation = self.get_image_orientation()
+        if orientation[0] == 'Horizontal':
+            return int(str(tags['EXIF ExifImageWidth']))
+        else:
+            return int(str(tags['EXIF ExifImageLength']))
+        '''
+
+    
     def get_height(self) -> int:
         image = Image.open(self.path)
         height = image.height
+        if self.get_image_orientation()[0] == 'Rotated':
+            height = image.width
         image.close()
         return height
-        
+        '''
+        tags = self.tags
+        ## 拦截hook
+        if self.exif_source_path != None:
+            image = Image.open(self.path)
+            height = image.height
+            image.close()
+            return height
+        orientation = self.get_image_orientation()
+        print(tags.keys())
+        if orientation[0] == 'Horizontal':
+            return int(str(tags['EXIF ExifImageLength']))
+        else:
+            return int(str(tags['EXIF ExifImageWidth']))
+        '''
+
+    
     def get_original_datetime(self):
         return str(self.tags['EXIF DateTimeOriginal'])
     
@@ -82,9 +117,9 @@ class JpegAnalyzer(object):
         
         tags = self.tags
         ## 拦截hook
-        if self.exif_source_path != None:
-            with open(self.path, 'rb') as f:
-                tags = exifread.process_file(f)
+        #if self.exif_source_path != None:
+        #    with open(self.path, 'rb') as f:
+        #        tags = exifread.process_file(f)
         if 'Image Orientation' not in tags:
             return ('Horizontal','normal')
         orientation = str(tags['Image Orientation']).strip().split(" ")
@@ -92,13 +127,17 @@ class JpegAnalyzer(object):
             return (orientation[0],orientation[1])
         else:
             return (orientation[0],int(orientation[1]),orientation[2])
+
     def get_camera_company(self) -> str:
         if 'Image Make' not in self.tags:
             return None
         return str(self.tags['Image Make'])
     
 def test():
-    test_jpeg_path = "../test/0711_1.jpg"
+    #test_jpeg_path = '../test/DSC00524.JPG'
+    #test_jpeg_path = "../test/test_photo.jpg"
+    #test_jpeg_path = "../output/output.jpg"
+    test_jpeg_path = "../../p/IMG_0757_1.jpg"
     
     analyzer = JpegAnalyzer(test_jpeg_path)
     print(f"Image Format: {analyzer.get_image_format()}")
