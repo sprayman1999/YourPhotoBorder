@@ -37,7 +37,7 @@
             "label_name": "camera args",
             "font_path": "./fonts/AlibabaPuHuiTi-3-55-Regular/AlibabaPuHuiTi-3-55-Regular.ttf",
             "font_size": "2.2%",
-            "content": "${FOCAL_LENGTH}m f/${APERTURE} ${EXPOSURE_TIME} ISO${CAMERA_ISO}",
+            "content": "${FOCAL_LENGTH}mm f/${APERTURE} ${EXPOSURE_TIME} ISO${CAMERA_ISO}",
             "position_offset": ["53%","3%"],
             "font_color": [0,0,0]
         },
