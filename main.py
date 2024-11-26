@@ -7,6 +7,7 @@ import os
 from multiprocessing import Pool
 from analyzers.jpeg_analyzer import JpegAnalyzer
 import re
+from concurrent.futures import ThreadPoolExecutor
 args = None
 config = {}
 
@@ -33,11 +34,11 @@ def photo_border_single_worker(input_path,output_path,source_path):
         camera_company = args.default_image_maker
     border_config = None
     target_rule = None
-    
     for rule in config['rules']:
         if camera_company.lower().find(rule['camera_company'].lower()) != -1:
             target_rule = rule
             break
+    
     if target_rule == None:
         print(f"[X] failed to generate photo because of null \"Image Maker\".\n\tPhotoPath: {input_path}\tOutputPath: {output_path}\tExifSourcePath: {local_source_path}")
         return
@@ -53,26 +54,34 @@ def photo_border_single_worker(input_path,output_path,source_path):
             .save(output_path)
 
 
-def photo_border_worker(input_path,output_path,source_path=None):
+def photo_border_worker(args):
+    input_path, output_path, source_path = args
     photo_border_single_worker(input_path=input_path,output_path=output_path,source_path=source_path)
 
     
 def folder_func(input_dir:str,output_dir:str,source_dir=None):
+    global config
     white_list = ['.jpeg','.jpg']
     file_list = list(filter(lambda item: '.' + item.lower().split(".").pop() in white_list,os.listdir(input_dir)))
-    pool = Pool(processes=4)
-    for file in file_list:
-        input_path = f"{input_dir}{os.sep}{file}"
-        output_path = f"{output_dir}{os.sep}{file}"
-        if source_dir != None:
-            source_path = f"{source_dir}{os.sep}{file}"
-        else:
-            source_path = None
-        pool.apply_async(photo_border_worker, (input_path,output_path,source_path))
-        #photo_border_worker(input_path,output_path,source_path)
-    pool.close()
-    pool.join()
-    
+
+    with ThreadPoolExecutor(max_workers=4) as executor:
+        task_list = []
+        for file in file_list:
+            print(f"find photo -> {file}")
+            input_path = f"{input_dir}{os.sep}{file}"
+            output_path = f"{output_dir}{os.sep}{file}"
+            if source_dir != None:
+                source_path = f"{source_dir}{os.sep}{file}"
+            else:
+                source_path = None
+            print(f"create work -> {(input_path,output_path,source_path)}")
+            task = executor.submit(photo_border_worker,(input_path,output_path,source_path))
+            task_list.append(task)
+            #pool.apply_async(func=photo_border_worker, args=(input_path,output_path,source_path))
+            #photo_border_worker(input_path,output_path,source_path)
+        for task in task_list:
+            task.done()
+
     print("[*] All task is finished!")
 
 def main():
